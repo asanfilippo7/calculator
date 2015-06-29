@@ -1,9 +1,11 @@
 $(document).ready(function() {
 	$('li.step:first-child').show();
+
 });
 
 $(document).ready(function() {
 	$('button.next').on("click",nextStep);
+	$('button.next').unwrap();
 });
 
 $(document).ready(function() {
@@ -27,13 +29,14 @@ function nextStep() {
 	var theGrandparent = $(theParent).parent();
 	var theCurrent = theGrandparent[0];
 	var theNext = $(theCurrent).next();
+	// console.log(theNext);
 	$(theNext).slideDown();
 	$(theCurrent).animate({height: "65px"},"slow").addClass('completed');
 	if($(this).is('.lastIns')) {
 		calNum();
 	}
 	if($(this).is('.lastAPR')) {
-		calNum2();
+		calNumTwo();
 	}
 }
 
@@ -101,6 +104,35 @@ function calNum()
 	finalResult = Math.round(invCapital);
 	console.log(finalResult);
 	var toPrint = finalResult.toLocaleString('en', {style: 'currency', currency: 'USD'});
+	console.log(toPrint);
 
 	document.getElementById('endval').innerHTML = toPrint;
+}
+
+function calNumTwo()
+{
+	var finalResultAPR = 0;
+	var finalResultCharge = 0;
+    var annualPremium = parseInt(document.getElementById('annu').value,10);
+    var payMode = parseInt(document.getElementById('mode').options[document.getElementById('mode').selectedIndex].value,10);
+    var paymentAmount = parseInt(document.getElementById('pay').value,10);
+    if(payMode == 1) { //monthly
+    	finalResultAPR = (36*((12*paymentAmount)-annualPremium))/((13*annualPremium)+(42*paymentAmount));
+    	finalResultCharge = (12*paymentAmount)-annualPremium;
+    	console.log(finalResultAPR);
+    	console.log(finalResultCharge);
+    }
+    if(payMode == 2) { //quarterly
+    	finalResultAPR = (12*((4*paymentAmount)-annualPremium))/((5*annualPremium)-(2*paymentAmount));
+    	finalResultCharge = (4*paymentAmount)-annualPremium;
+    	console.log(finalResultAPR);
+    	console.log(finalResultCharge);
+    }
+    if(payMode == 3) { //semi-annually
+    	finalResultAPR = (2*((2*paymentAmount)-annualPremium))/((annualPremium)-(paymentAmount));
+    	finalResultCharge = (2*paymentAmount)-annualPremium;
+    	console.log(finalResultAPR);
+    }
+    document.getElementById('endval2').innerHTML = finalResultAPR.toLocaleString('en', {style: 'percent'});
+    document.getElementById('endval3').innerHTML = finalResultCharge.toLocaleString('en', {style: 'currency', currency: 'USD'});
 }
