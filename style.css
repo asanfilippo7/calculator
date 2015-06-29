@@ -3,7 +3,8 @@ body, input, button {
 }
 
 .holds-calculator {
-	width:470px;
+	/*width:470px;*/
+	width: 80%;
 }
 
 .step-content {
@@ -25,6 +26,7 @@ button.next, button.redo {
 	border:none;
 	text-transform: uppercase;
 	font-weight: 700;
+	margin-top: 0.75em;
 }
 
 ul.calculator-steps {
@@ -35,14 +37,14 @@ li.step {
 	display:none;
 }
 
-li.step.six .step-content {
+li.step.result .step-content {
 	background-color: #2597d2;
 }
 
 li.step.completed .step-content {
 	background-color:#8e9093;
-	padding-top: 1em;
-	padding-bottom: 1em;
+	padding-top: 1.4em;
+	padding-bottom: 1.45em;
 }
 
 li.step.completed .step-content p {
@@ -67,6 +69,7 @@ li.step.completed .step-content button, li.step.completed .fa-question-circle, l
 	display:none;
 	position: relative;
 	z-index:10;
+	margin-top: 1em;
 	background-color: #ededee;
 	padding:0.5em;
 	color:#00314e;
@@ -74,24 +77,61 @@ li.step.completed .step-content button, li.step.completed .fa-question-circle, l
 	font-size: 12px;
 	text-transform: none;
 }
+.article-content .holds-calculator ul {
+	padding: 0;
+}
+.article-content .holds-calculator ul li::before {
+	content: "";
+}
+ .article-content .holds-calculator p {
+	color: #fff;
+}
+#endval::before {
+	content: "$ ";
+}
 
-@media screen and (max-width: 850px) {
+
+@media screen and (max-width: 1013px) {
+
 	.holds-calculator {
-		width:440px;
+		width: 90%;
 	}
 
-	.step-content {
+	.step-content p, .step-content input[type="text"],.step-content select, .step-content textarea{
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 850px) {
+	
+
+	.step-content p, .step-content input[type="text"],.step-content select, .step-content textarea{
 		font-size: 13px;
+	}
+	.step-content input[type="text"],.step-content select, .step-content textarea{
+		padding: 5px 5px 2px;
+		height: auto;
+	}
+	.article-content .holds-calculator li {
+		margin: 0;
 	}
 }
 
 @media screen and (max-width: 595px) {
+
 	.holds-calculator {
-		width:235px;
+		width:100%;
 	}
 
-	.step-content {
+	.step-content p, .step-content input[type="text"],.step-content select, .step-content textarea{
 		font-size: 11px;
+	}
+	.step-content input[type="text"],.step-content select, .step-content textarea{
+		padding: 0px 5px 2px;
+		height: 1.8em;
+	}
+	.article-content .holds-calculator li {
+		margin: 0;
 	}
 
 }
